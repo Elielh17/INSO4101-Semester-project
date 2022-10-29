@@ -1,4 +1,11 @@
 import java.awt.event.*;  
+import Tools.*;
+import Tools.command.RumadBot;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.awt.AWTException;
+import java.awt.Robot;
 
 interface Actions extends ActionListener {
     public static gui mygui = new gui();
@@ -97,6 +104,44 @@ interface Actions extends ActionListener {
         public void actionPerformed(ActionEvent e) {
             mygui.UserInputText = mygui.txt.getText();
             System.out.println(mygui.UserInputText);
+
+            Runtime run = Runtime.getRuntime();
+            try {
+                run.exec("cmd /c start cmd.exe /K ssh estudiante@rumad.uprm.edu");
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+        
+            // Create an instance of Robot class
+            command command = new command();
+            RumadBot bot = null;
+            try {
+                bot = command.new RumadBot(new Robot(), "2", mygui.UserInputText, new ArrayList<String>());
+            } catch (AWTException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            try {
+                bot.enter();
+            } catch (IOException | AWTException | InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            try {
+                bot.goToSchedule();
+            } catch (IOException | AWTException | InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
 
     }

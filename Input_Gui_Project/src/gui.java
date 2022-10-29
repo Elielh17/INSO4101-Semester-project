@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*; 
 
+
+import java.io.IOException;
+
 public class gui {
 
   /*
@@ -36,7 +39,7 @@ public class gui {
 
   public static String UserInputText = "";
 
-  public static void main(String args[]){
+  public static void main(String args[]) throws IOException, InterruptedException, AWTException{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(600,600);
     Rectangle framebounds = frame.getBounds();
@@ -93,6 +96,7 @@ public class gui {
 
     //Setting the frame (Window?) visible
     frame.setVisible(true);
+
   }
 
 }
