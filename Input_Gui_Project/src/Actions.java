@@ -95,8 +95,8 @@ interface Actions extends ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String text = mygui.txt.getText();
-            System.out.println(text);
+            mygui.UserInputText = mygui.txt.getText();
+            System.out.println(mygui.UserInputText);
         }
 
     }
