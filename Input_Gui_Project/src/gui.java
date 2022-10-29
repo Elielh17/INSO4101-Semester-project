@@ -1,90 +1,98 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;  
+import java.awt.*; 
 
-class gui{
+public class gui {
 
-    public static void main(String args[]){
-      //Creates the frame (Window?)
-       JFrame frame = new JFrame("Putty en su forma Gay");
-       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       frame.setSize(600,600);
-       Rectangle framebounds = frame.getBounds();
+  /*
+  * States:
+  * 1- Main buttons
+  * 2- Matricula Actions, Alta/Baja (MatriculaButton takes you to this state)
+  * 3- Course information input for Alta/Baja
+  */
+  public static enum States {
+    MainButtons, MatriculaButtons, CourseInput;
+  }
 
-       //Creating items
-       JButton MatriculaButton = new JButton("Matricula");
-       JButton AltaButton = new JButton("Alta");
-       JButton BajaButton = new JButton("Baja");
-       JButton EnterButton = new JButton("Enter");
-       JTextField txt = new JTextField();
-       JLabel curso = new JLabel("Codificacion del curso:");
+  public static JButton MatriculaButton = new JButton("Matricula");;
+  public static JButton AltaButton = new JButton("Alta");
+  public static JButton BajaButton = new JButton("Baja");
+  public static JButton EnterButton = new JButton("Enter");
+  public static JButton BackButton = new JButton("Back");
+  public static JTextField txt = new JTextField();
+  public static JLabel curso = new JLabel("Codificacion del curso:");
 
-       //Setting position of items
-       MatriculaButton.setBounds(225,200,100,100); 
-       AltaButton.setBounds(168,200, 10, 10);
-       BajaButton.setBounds(280,200, 10, 10);
-       EnterButton.setBounds(480, 200, 100, 100);
-       txt.setBounds(180,200,100,100);
-       curso.setBounds(30,200,100,100);
+  public static States CurrentState = States.MainButtons;
 
-       //Adding items to the frame (window?)
-       frame.add(MatriculaButton);
-       frame.add(AltaButton);
-       frame.add(BajaButton);
-       frame.add(EnterButton);
-       frame.add(txt);
-       frame.add(curso);
-       frame.setLayout(null);
+  //Creates the frame (Window?)
+  public static JFrame frame = new JFrame("Putty en su forma Gay");
 
-       //Setting the size of the items
-       MatriculaButton.setSize(100,100); 
-       AltaButton.setSize(100,100);
-       BajaButton.setSize(100,100);
-       EnterButton.setSize(100, 50);
-       txt.setSize(300,50);
-       curso.setSize(200,50);
+  //Instantiating Actions
+  public static Actions.MainButtons mainbuttons = new Actions.MainButtons();
+  public static Actions.MatriculaButtons matriculaButtons = new Actions.MatriculaButtons();
+  public static Actions.AltaButtonAction altaButtonAction = new Actions.AltaButtonAction();
+  public static Actions.BajaButtonAction bajaButtonAction = new Actions.BajaButtonAction();
+  public static Actions.BackButtonAction backButtonAction = new Actions.BackButtonAction();
+  public static Actions.EnterButtonAction enterButtonAction = new Actions.EnterButtonAction();
+
+  public static String UserInputText = "";
+
+  public static void main(String args[]){
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(600,600);
+    Rectangle framebounds = frame.getBounds();
+
+    //Setting position of items
+    MatriculaButton.setBounds(225,200,100,100); 
+    AltaButton.setBounds(168,200, 10, 10);
+    BajaButton.setBounds(280,200, 10, 10);
+    EnterButton.setBounds(480, 200, 100, 100);
+    BackButton.setBounds(0,0,100,100);
+    txt.setBounds(180,200,100,100);
+    curso.setBounds(30,200,100,100);
+
+    //Adding items to the frame (window?)
+    frame.add(MatriculaButton);
+    frame.add(AltaButton);
+    frame.add(BajaButton);
+    frame.add(EnterButton);
+    frame.add(BackButton);
+    frame.add(txt);
+    frame.add(curso);
+    frame.setLayout(null);
+
+    //Setting the size of the items
+    MatriculaButton.setSize(100,100); 
+    AltaButton.setSize(100,100);
+    BajaButton.setSize(100,100);
+    BackButton.setSize(70,30);
+    EnterButton.setSize(100, 50);
+    txt.setSize(300,50);
+    curso.setSize(200,50);
 
 
-       //Disabling unused items at the beginning
+    //Disabling unused items at the beginning
+    AltaButton.setVisible(false);
+    BajaButton.setVisible(false);
+    EnterButton.setVisible(false);
+    txt.setVisible(false);
+    curso.setVisible(false);
 
-       //AltaButton.setEnabled(false);
-       //BajaButton.setEnabled(false);
-       AltaButton.setVisible(false);
-       BajaButton.setVisible(false);
-       EnterButton.setVisible(false);
-       txt.setVisible(false);
-       curso.setVisible(false);
 
-       
-       //Action of 'Matricula' button
-       MatriculaButton.addActionListener(new ActionListener(){  
-         public void actionPerformed(ActionEvent e){  
-            AltaButton.setVisible(true);
-            BajaButton.setVisible(true);
-            MatriculaButton.setVisible(false);
-                 }  
-             });  
-      //Action of 'Altabutton'
-       AltaButton.addActionListener(new ActionListener(){  
-         public void actionPerformed(ActionEvent e){  
-            AltaButton.setVisible(false);
-            BajaButton.setVisible(false);
-            EnterButton.setVisible(true);
-            txt.setVisible(true);
-            curso.setVisible(true);
-                 }  
-             }); 
-      
-       //String text = txt.getText();
-       //Prints text
-       EnterButton.addActionListener(new ActionListener(){  
-         public void actionPerformed(ActionEvent e){  
-             String text = txt.getText();
-             System.out.println(text);
-                 }  
-             }); 
+    //Adding the actions to the corresponding buttons
 
-       frame.setVisible(true);
-    }
+    //Action of 'Matricula' button
+    MatriculaButton.addActionListener(matriculaButtons);
+    //Action of 'Altabutton'
+    AltaButton.addActionListener(altaButtonAction); 
+    //Action of 'Bajabutton'
+    BajaButton.addActionListener(bajaButtonAction); 
+    //Action of 'BackButton'
+    BackButton.addActionListener(backButtonAction);
+    //Action of 'EnterButton' it prints the text on the terminal and stores the text in a variable
+    EnterButton.addActionListener(enterButtonAction);
+
+    //Setting the frame (Window?) visible
+    frame.setVisible(true);
+  }
 
 }
