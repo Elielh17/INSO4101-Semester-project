@@ -15,7 +15,7 @@ public class gui {
   public static enum States {
     MainButtons, MatriculaButtons, CourseInput;
   }
-
+  //Instantiating buttons and other items
   public static JButton MatriculaButton = new JButton("Matricula");;
   public static JButton AltaButton = new JButton("Alta");
   public static JButton BajaButton = new JButton("Baja");

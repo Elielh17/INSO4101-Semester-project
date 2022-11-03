@@ -10,6 +10,7 @@ import java.awt.Robot;
 interface Actions extends ActionListener {
     public static gui mygui = new gui();
 
+    //Action to return to the main buttons state
     public class MainButtons implements ActionListener {
         
         @Override
@@ -45,6 +46,7 @@ interface Actions extends ActionListener {
 
     }
 
+    //Enroll
     //Action of 'Altabutton'
     public class AltaButtonAction implements ActionListener {
 
@@ -60,7 +62,8 @@ interface Actions extends ActionListener {
         }
         
     }
-
+    
+    //Unenroll
     //Action of 'Bajabutton'
     public class BajaButtonAction implements ActionListener {
 
@@ -76,7 +79,7 @@ interface Actions extends ActionListener {
         }
 
     }
-
+    //Action to return to the previous state
     public class BackButtonAction implements ActionListener {
 
         @Override
@@ -98,6 +101,7 @@ interface Actions extends ActionListener {
 
     }
 
+    //Action to store text and process it to make actions in Rumad server
     public class EnterButtonAction implements ActionListener {
 
         @Override
