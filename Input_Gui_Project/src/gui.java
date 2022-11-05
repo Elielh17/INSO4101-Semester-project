@@ -27,7 +27,7 @@ public class gui {
   public static States CurrentState = States.MainButtons;
 
   //Creates the frame (Window?)
-  public static JFrame frame = new JFrame("Putty en su forma Gay");
+  public static JFrame frame = new JFrame("");
 
   //Instantiating Actions
   public static Actions.MainButtons mainbuttons = new Actions.MainButtons();
