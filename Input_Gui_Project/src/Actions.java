@@ -16,11 +16,21 @@ interface Actions extends ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             mygui.MatriculaButton.setVisible(true);
+            mygui.AvailableSectionsButton.setVisible(true);
             mygui.AltaButton.setVisible(false);
             mygui.BajaButton.setVisible(false);
             mygui.EnterButton.setVisible(false);
-            mygui.txt.setVisible(false);
-            mygui.curso.setVisible(false);
+            mygui.textField.setVisible(false);
+            mygui.cursoLabel.setVisible(false);
+            mygui.BackButton.setVisible(false);
+            mygui.NumeroIDLabel.setVisible(false);
+            mygui.CodigoAccesoLabel.setVisible(false);
+            mygui.SeguroSocialLabel.setVisible(false);
+            mygui.FechaNacimientoLabel.setVisible(false);
+            mygui.AddButton.setVisible(false);
+            mygui.DeveloperLabel.setVisible(true);
+            mygui.VersionLabel.setVisible(true);
+            //mygui.TittleLabel.setVisible(true);
             
         }
 
@@ -31,21 +41,45 @@ interface Actions extends ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mygui.AltaButton.setVisible(true);
-            mygui.BajaButton.setVisible(true);
+
+            mygui.textField.setVisible(true);
+            mygui.NumeroIDLabel.setVisible(true);
+            mygui.EnterButton.setVisible(true);
             mygui.MatriculaButton.setVisible(false);
+            mygui.AvailableSectionsButton.setVisible(false);
+            mygui.DeveloperLabel.setVisible(false);
+            mygui.VersionLabel.setVisible(false);
+            //mygui.TittleLabel.setVisible(false);
+            mygui.BackButton.setVisible(true);
 
-            //In case of 'BackButton' Action
-            mygui.EnterButton.setVisible(false);
-            mygui.txt.setVisible(false);
-            mygui.curso.setVisible(false);
+            mygui.textField.setText(null);
 
-            mygui.CurrentState = gui.States.MatriculaButtons;
+            mygui.CurrentState = gui.States.StudentInfoInput; 
+        }
+
+    }
+    
+    public class AvailableSectionsButtons implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mygui.MatriculaButton.setVisible(false);
+            mygui.AvailableSectionsButton.setVisible(false);
+            mygui.DeveloperLabel.setVisible(false);
+            mygui.VersionLabel.setVisible(false);
+            //mygui.TittleLabel.setVisible(false);
+            mygui.EnterButton.setVisible(true);
+            mygui.textField.setVisible(true);
+            mygui.cursoLabel.setVisible(true);
+            mygui.BackButton.setVisible(true);
+
+            mygui.textField.setText(null);
+
+            mygui.CurrentState = gui.States.AvailableSection;
             
         }
 
     }
-
     //Enroll
     //Action of 'Altabutton'
     public class AltaButtonAction implements ActionListener {
@@ -55,9 +89,12 @@ interface Actions extends ActionListener {
             mygui.AltaButton.setVisible(false);
             mygui.BajaButton.setVisible(false);
             mygui.EnterButton.setVisible(true);
-            mygui.txt.setVisible(true);
-            mygui.curso.setVisible(true);
+            mygui.AddButton.setVisible(true);
+            mygui.textField.setVisible(true);
+            mygui.cursoLabel.setVisible(true);
             
+            mygui.textField.setText(null);
+
             mygui.CurrentState = gui.States.CourseInput;
         }
         
@@ -72,8 +109,11 @@ interface Actions extends ActionListener {
             mygui.AltaButton.setVisible(false);
             mygui.BajaButton.setVisible(false);
             mygui.EnterButton.setVisible(true);
-            mygui.txt.setVisible(true);
-            mygui.curso.setVisible(true);
+            mygui.AddButton.setVisible(true);
+            mygui.textField.setVisible(true);
+            mygui.cursoLabel.setVisible(true);
+
+            mygui.textField.setText(null);
 
             mygui.CurrentState = gui.States.CourseInput;
         }
@@ -88,8 +128,14 @@ interface Actions extends ActionListener {
                 case MatriculaButtons:
                     mygui.mainbuttons.actionPerformed(e);
                   break;
+                case StudentInfoInput:
+                    mygui.mainbuttons.actionPerformed(e);
+                break;
                 case CourseInput:
-                    mygui.matriculaButtons.actionPerformed(e);
+                    mygui.mainbuttons.actionPerformed(e);
+                break;
+                case AvailableSection:
+                    mygui.mainbuttons.actionPerformed(e);
                 break;
       
                 default:
@@ -106,48 +152,96 @@ interface Actions extends ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mygui.UserInputText = mygui.txt.getText();
-            System.out.println(mygui.UserInputText);
+            //When doing matricula
+            if (mygui.CurrentState == gui.States.CourseInput) {
+                mygui.UsercourseInput = mygui.textField.getText();
+                System.out.println(mygui.UsercourseInputArr);
 
-            Runtime run = Runtime.getRuntime();
-            try {
-                run.exec("cmd /c start cmd.exe /K ssh estudiante@rumad.uprm.edu");
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                Runtime run = Runtime.getRuntime();
+                try {
+                    run.exec("cmd /c start cmd.exe /K ssh estudiante@rumad.uprm.edu");
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+            
+                // Create an instance of Robot class
+                command command = new command();
+                RumadBot bot = null;
+                try {
+                    bot = command.new RumadBot(new Robot(), "2", mygui.UsercourseInput, new ArrayList<String>());
+                } catch (AWTException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+                try {
+                    bot.enter();
+                } catch (IOException | AWTException | InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                try {
+                    bot.goToSchedule();
+                } catch (IOException | AWTException | InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
             }
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            //When in available sections
+            else if (mygui.CurrentState == gui.States.AvailableSection) {
+                //Insert code here <-------------------------------------------------------------------------------------Here
             }
 
-        
-            // Create an instance of Robot class
-            command command = new command();
-            RumadBot bot = null;
-            try {
-                bot = command.new RumadBot(new Robot(), "2", mygui.UserInputText, new ArrayList<String>());
-            } catch (AWTException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
+            //When entering info of student
+            else if (mygui.CurrentState == gui.States.StudentInfoInput && mygui.count +1 != mygui.Labels.length) {
 
-            try {
-                bot.enter();
-            } catch (IOException | AWTException | InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+                if (mygui.textField.getText() == " ") {
+                    mygui.textField.setText("Write text here!");
+                }
+                else {
+                    mygui.Labels[mygui.count].setVisible(false);
+                    mygui.count += 1;
+                    mygui.Labels[mygui.count].setVisible(true);
+                    mygui.textField.setText(null);
+                    mygui.UserInfoInput.add(mygui.textField.getText());
+                }
             }
-            try {
-                bot.goToSchedule();
-            } catch (IOException | AWTException | InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            //When finish entering info of student
+            else {
+                mygui.AltaButton.setVisible(true);
+                mygui.BajaButton.setVisible(true);
+                mygui.BackButton.setVisible(true);
+                mygui.FechaNacimientoLabel.setVisible(false);
+
+                //In case of 'BackButton' Action
+                mygui.EnterButton.setVisible(false);
+                mygui.textField.setVisible(false);
+                mygui.cursoLabel.setVisible(false);
+                mygui.count = 0;
+
+                mygui.CurrentState = gui.States.MatriculaButtons;
             }
         }
 
     }
+
+    public class AddButtonAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mygui.UsercourseInputArr.add(mygui.textField.getText());
+            
+        }
+
+    }
+
 
 }
