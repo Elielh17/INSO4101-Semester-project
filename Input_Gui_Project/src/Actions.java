@@ -232,7 +232,7 @@ interface Actions extends ActionListener {
         }
 
     }
-
+    //Add action
     public class AddButtonAction implements ActionListener {
 
         @Override
