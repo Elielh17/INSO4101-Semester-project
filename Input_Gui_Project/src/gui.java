@@ -38,7 +38,6 @@ public class gui {
 
   //Declaring Texts fields
   public static JTextField textField = new JTextField();
-  //public static JTextField StudentInfoText = new JTextField();
 
   public static States CurrentState = States.MainButtons;
 
@@ -57,6 +56,7 @@ public class gui {
 
   //Variables
   public static ArrayList<String> UsercourseInputArr = new ArrayList<String>();
+  public static ArrayList<String> UsersectionInputArr = new ArrayList<String>();
   public static String UsercourseInput = "";
   public static ArrayList<String> UserInfoInput = new ArrayList<String>();
   public static JLabel Labels[] = {NumeroIDLabel, CodigoAccesoLabel, SeguroSocialLabel, FechaNacimientoLabel};
@@ -64,7 +64,7 @@ public class gui {
 
   public static int count = 0;
 
-  public static ImageIcon img = new ImageIcon("C:\\Users\\eliel\\OneDrive\\Escritorio\\Uni files\\Logominimized.jpg");
+  public static ImageIcon img = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.jpg");
   public static JLabel LogoLabel = new JLabel(img);
   public static void main(String args[]) throws IOException, InterruptedException, AWTException{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

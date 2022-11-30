@@ -237,7 +237,21 @@ interface Actions extends ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            mygui.UsercourseInputArr.add(mygui.textField.getText());
+            try {
+                if (mygui.textField.getText().charAt(8) != '-') {
+                    mygui.textField.setText("Wrong Input!");
+                }
+                else {
+                    String curso = mygui.textField.getText().substring(0,8);
+                    String Section = mygui.textField.getText().substring(9);
+                    mygui.UsercourseInputArr.add(mygui.textField.getText().substring(0, 8));
+                    mygui.UsersectionInputArr.add(mygui.textField.getText().substring(9));
+
+                    mygui.textField.setText(null);
+                }
+            } catch (Exception l) {
+                mygui.textField.setText("Wrong Input!");
+            }
             
         }
 
