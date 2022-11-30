@@ -66,10 +66,10 @@ public class gui {
 
   public static int count = 0;
 
-  public static ImageIcon imgLogo = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.jpg");
   public static ImageIcon imgBg = new ImageIcon("Input_Gui_Project\\Images\\background.jpg");
-  public static JLabel LogoLabel = new JLabel(imgLogo);
+  public static ImageIcon imgLogo = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.png");
   public static JLabel BgLabel = new JLabel(imgBg);
+  public static JLabel LogoLabel = new JLabel(imgLogo);
   
   public static void main(String args[]) throws IOException, InterruptedException, AWTException{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,7 +100,19 @@ public class gui {
     //TittleLabel.setBounds(168,100,500,500);
     DeveloperLabel.setBounds(1,425,100,100);
     VersionLabel.setBounds(497,520,100,100);
-    LogoLabel.setBounds(-100,-100, 600,600);
+    BgLabel.setBounds(0,0, 600,600);
+    LogoLabel.setBounds(-30,0, 600,600);
+
+    //Setting color of labels
+    cursoLabel.setForeground(Color.white);
+    NumeroIDLabel.setForeground(Color.white);
+    CodigoAccesoLabel.setForeground(Color.white);
+    SeguroSocialLabel.setForeground(Color.white);
+    FechaNacimientoLabel.setForeground(Color.white);
+    DeveloperLabel.setForeground(Color.white);
+    VersionLabel.setForeground(Color.white);
+    BgLabel.setForeground(Color.white);
+    LogoLabel.setForeground(Color.white);
 
 
     //Adding items to the frame (window)
@@ -122,6 +134,7 @@ public class gui {
     frame.add(DeveloperLabel);
     frame.add(VersionLabel);
     frame.add(LogoLabel);
+    frame.add(BgLabel);
     
     //frame.setLayout(null);
 
@@ -142,6 +155,7 @@ public class gui {
     //TittleLabel.setSize(200,50);
     DeveloperLabel.setSize(200,150);
     VersionLabel.setSize(200,50);
+    BgLabel.setSize(600,600);
     LogoLabel.setSize(600,600);
     
 
