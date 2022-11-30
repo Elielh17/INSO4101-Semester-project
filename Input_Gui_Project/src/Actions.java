@@ -53,7 +53,7 @@ interface Actions extends ActionListener {
             mygui.BackButton.setVisible(true);
 
             mygui.textField.setText(null);
-
+            mygui.matricula=true;
             mygui.CurrentState = gui.States.StudentInfoInput; 
         }
 
@@ -94,7 +94,7 @@ interface Actions extends ActionListener {
             mygui.cursoLabel.setVisible(true);
             
             mygui.textField.setText(null);
-
+            mygui.alta = true;
             mygui.CurrentState = gui.States.CourseInput;
         }
         
@@ -141,6 +141,9 @@ interface Actions extends ActionListener {
                 default:
                   break;
             }
+            mygui.UserInfoInput.clear();
+            mygui.UsercourseInputArr.clear();
+            mygui.UsersectionInputArr.clear();
         }
             
         
@@ -154,7 +157,6 @@ interface Actions extends ActionListener {
         public void actionPerformed(ActionEvent e) {
             //When doing matricula
             if (mygui.CurrentState == gui.States.CourseInput) {
-                mygui.UsercourseInput = mygui.textField.getText();
                 System.out.println(mygui.UsercourseInputArr);
 
                 Runtime run = Runtime.getRuntime();
@@ -176,28 +178,57 @@ interface Actions extends ActionListener {
                 command command = new command();
                 RumadBot bot = null;
                 try {
-                    bot = command.new RumadBot(new Robot(), "2", mygui.UsercourseInput, new ArrayList<String>());
-                } catch (AWTException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
-                try {
+                    bot = command.new RumadBot(new Robot(), "2", mygui.UsercourseInputArr, mygui.UsersectionInputArr, mygui.UserInfoInput, mygui.alta);
                     bot.enter();
-                } catch (IOException | AWTException | InterruptedException e1) {
-                    // TODO Auto-generated catch block
+
+                    if (mygui.matricula) {bot.doMatricula();}
+                    else {bot.goToSchedule();}
+
+                } catch (AWTException e1) {
                     e1.printStackTrace();
-                }
-                try {
-                    bot.goToSchedule();
-                } catch (IOException | AWTException | InterruptedException e1) {
-                    // TODO Auto-generated catch block
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
             }
             //When in available sections
             else if (mygui.CurrentState == gui.States.AvailableSection) {
-                //Insert code here <-------------------------------------------------------------------------------------Here
+                //Insert code here <-------------------------------------------------------------------------------------HereRuntime run = Runtime.getRuntime();
+                mygui.UsercourseInputArr.add(mygui.textField.getText());
+                System.out.println(mygui.UsercourseInputArr);
+                Runtime run = Runtime.getRuntime();
+                try {
+                    run.exec("cmd /c start cmd.exe /K ssh estudiante@rumad.uprm.edu");
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+            
+                // Create an instance of Robot class
+                command command = new command();
+                RumadBot bot = null;
+                try {
+                    bot = command.new RumadBot(new Robot(), "2", mygui.UsercourseInputArr, mygui.UsersectionInputArr, mygui.UserInfoInput, mygui.alta);
+                    bot.enter();
+
+                    if (mygui.matricula) {bot.doMatricula();}
+                    else {bot.goToSchedule();}
+
+                } catch (AWTException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
 
             //When entering info of student
@@ -210,12 +241,15 @@ interface Actions extends ActionListener {
                     mygui.Labels[mygui.count].setVisible(false);
                     mygui.count += 1;
                     mygui.Labels[mygui.count].setVisible(true);
-                    mygui.textField.setText(null);
                     mygui.UserInfoInput.add(mygui.textField.getText());
+                    mygui.textField.setText(null);
+                    System.out.println(mygui.UserInfoInput);
                 }
             }
             //When finish entering info of student
             else {
+                mygui.UserInfoInput.add(mygui.textField.getText());
+                System.out.println(mygui.UserInfoInput);
                 mygui.AltaButton.setVisible(true);
                 mygui.BajaButton.setVisible(true);
                 mygui.BackButton.setVisible(true);
@@ -256,6 +290,5 @@ interface Actions extends ActionListener {
         }
 
     }
-
 
 }

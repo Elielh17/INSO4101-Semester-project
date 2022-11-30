@@ -60,12 +60,15 @@ public class gui {
   public static String UsercourseInput = "";
   public static ArrayList<String> UserInfoInput = new ArrayList<String>();
   public static JLabel Labels[] = {NumeroIDLabel, CodigoAccesoLabel, SeguroSocialLabel, FechaNacimientoLabel};
+  public static boolean alta = false;
+  public static boolean matricula = false;
 
 
   public static int count = 0;
 
   public static ImageIcon img = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.jpg");
   public static JLabel LogoLabel = new JLabel(img);
+  
   public static void main(String args[]) throws IOException, InterruptedException, AWTException{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     //frame.setLayout(null); //Terminates default flow layout
@@ -173,4 +176,4 @@ public class gui {
 
   }
 
-}
+}//
