@@ -23,7 +23,7 @@ public class gui {
   public static JButton AltaButton = new JButton("Alta");
   public static JButton BajaButton = new JButton("Baja");
   public static JButton EnterButton = new JButton("Enter");
-  public static JButton AddButton = new JButton("Add");
+  public static JButton AddButton = new JButton("Add Course");
   public static JButton BackButton = new JButton("Back");
 
   //Declaring Labels
@@ -66,8 +66,10 @@ public class gui {
 
   public static int count = 0;
 
-  public static ImageIcon img = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.jpg");
-  public static JLabel LogoLabel = new JLabel(img);
+  public static ImageIcon imgLogo = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.jpg");
+  public static ImageIcon imgBg = new ImageIcon("Input_Gui_Project\\Images\\background.jpg");
+  public static JLabel LogoLabel = new JLabel(imgLogo);
+  public static JLabel BgLabel = new JLabel(imgBg);
   
   public static void main(String args[]) throws IOException, InterruptedException, AWTException{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +102,7 @@ public class gui {
     VersionLabel.setBounds(497,520,100,100);
     LogoLabel.setBounds(-100,-100, 600,600);
 
+
     //Adding items to the frame (window)
     frame.add(MatriculaButton);
     frame.add(AvailableSectionsButton);
@@ -115,9 +118,11 @@ public class gui {
     frame.add(SeguroSocialLabel);
     frame.add(FechaNacimientoLabel);
     //frame.add(TittleLabel);
+    
     frame.add(DeveloperLabel);
     frame.add(VersionLabel);
     frame.add(LogoLabel);
+    
     //frame.setLayout(null);
 
     //Setting the size of the items
@@ -138,6 +143,7 @@ public class gui {
     DeveloperLabel.setSize(200,150);
     VersionLabel.setSize(200,50);
     LogoLabel.setSize(600,600);
+    
 
 
     //Disabling unused items at the beginning

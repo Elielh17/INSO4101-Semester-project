@@ -48,7 +48,7 @@ public class command
             bot.keyPress(KeyEvent.VK_6);
             Thread.sleep(1000);
 
-            type(String.valueOf(Integer.parseInt(sem)+1), bot);
+            type(String.valueOf((Integer.parseInt(sem)+1)%4), bot);
             Thread.sleep(2000);
 
 
