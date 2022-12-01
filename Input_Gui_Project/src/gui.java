@@ -67,7 +67,7 @@ public class gui {
   public static int count = 0;
 
   public static ImageIcon imgBg = new ImageIcon("Input_Gui_Project\\Images\\background.jpg");
-  public static ImageIcon imgLogo = new ImageIcon("Input_Gui_Project\\Images\\Logominimized.png");
+  public static ImageIcon imgLogo = new ImageIcon("Input_Gui_Project\\Images\\Logominimized_Withe text.png");
   public static JLabel BgLabel = new JLabel(imgBg);
   public static JLabel LogoLabel = new JLabel(imgLogo);
   
